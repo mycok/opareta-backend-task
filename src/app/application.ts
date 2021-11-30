@@ -1,6 +1,8 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 
+import { userRouter } from '../router/user';
+
 export class Application {
   static instance = new Application();
 
@@ -9,14 +11,18 @@ export class Application {
   private constructor() {
     this.app = express();
     this.middlewareSetup();
-    // this.RouterSetup();
+    this.RouterSetup();
   }
 
   private middlewareSetup() {
     this.app.use(cors());
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
   }
 
-  // private RouterSetup() {
-  //   this.app.use([]);
-  // }
+  private RouterSetup() {
+    this.app.use([
+      userRouter,
+    ]);
+  }
 }
