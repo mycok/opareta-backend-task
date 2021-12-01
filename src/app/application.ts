@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 
-import { userRouter } from '../router/user';
+import { userRouter, apyRouter } from '../router/router';
 
 export class Application {
   static instance = new Application();
@@ -23,6 +23,7 @@ export class Application {
   private RouterSetup() {
     this.app.use([
       userRouter,
+      apyRouter,
     ]);
   }
 }

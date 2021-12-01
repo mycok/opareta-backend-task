@@ -1,28 +1,29 @@
 import sqlite3, { Database } from 'sqlite3';
 
-// const queryList: string[] = [
-//   `CREATE TABLE IF NOT EXISTS users (
-//           _id INTEGER PRIMARY KEY NOT NULL,
-//           username TEXT NOT NULL
-//       )`,
-// ];
+const queryList: string[] = [
+  `CREATE TABLE IF NOT EXISTS customers (
+          _id INTEGER PRIMARY KEY NOT NULL,
+          username TEXT NOT NULL
+    )`,
 
-function createTables(db: Database) {
-//   queries.forEach((query: string) => {
-//     db.exec(query, (err) => {
-//       if (err) {
-//         throw err;
-//       }
-//     });
-//   });
-  const q = `CREATE TABLE IF NOT EXISTS users (
+  `CREATE TABLE IF NOT EXISTS apy (
         _id INTEGER PRIMARY KEY NOT NULL,
-        username TEXT NOT NULL
-    )`;
-  db.exec(q, (err) => {
-    if (err) {
-      throw err;
-    }
+        deposit INTEGER NOT NULL,
+        interest_rate INTEGER NOT NULL,
+        annual_compound_time INTEGER NOT NULL,
+        apy INTEGER NOT NULL,
+        final_value INTEGER NOT NULL,
+        customer_id INTEGER NOT NULL
+  )`,
+];
+
+function createTables(db: Database, ...queries: string[]) {
+  queries.forEach((query: string) => {
+    db.exec(query, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
   });
 }
 
@@ -33,7 +34,7 @@ export function openDB(): Database {
     }
 
     db.on('open', () => {
-      createTables(db);
+      createTables(db, ...queryList);
     });
   });
 
