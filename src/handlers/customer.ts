@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { Customer } from '../data/customer';
-import { getUser, insert } from '../database/user.repository';
+import { insert } from '../database/customer.repository';
 import { logger } from '../utils/logger';
 
 export function createCustomerHandler(req: Request, res: Response) {
@@ -25,25 +25,5 @@ export function createCustomerHandler(req: Request, res: Response) {
     }
 
     res.status(201).json({ status: 'successful', lastID });
-  });
-}
-
-export function getCustomerHandler(req: Request, res: Response) {
-  const { params: { id } } = req;
-
-  getUser(Number(id), (err, result) => {
-    if (err) {
-      logger.error(err);
-      res.status(500).json({ error: 'something went wrong!' });
-
-      return;
-    }
-
-    if (!result) {
-      res.status(400).json({ error: 'customer not found!' });
-
-      return;
-    }
-    res.status(200).json({ status: 'successful', customer: result });
   });
 }
