@@ -1,4 +1,4 @@
-function calculateAPY(interest: number, compoundingPeriod: number): number {
+export function calculateAPY(interest: number, compoundingPeriod: number): number {
   const percentageRate = interest / 100;
   let apy = (1 + percentageRate / compoundingPeriod) ** compoundingPeriod;
   apy = (apy - 1) * 100;

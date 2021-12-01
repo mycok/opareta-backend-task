@@ -45,6 +45,8 @@
         "no-underscore-dangle": "off",
         "func-names": "off",
         "prefer-arrow-callback": "off",
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "camelcase": "off",
+        "prefer-destructuring": "off"
     }
 }

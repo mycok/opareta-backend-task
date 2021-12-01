@@ -16,16 +16,3 @@ export function insert(
     }
   });
 }
-
-export function getUser(id: number, callback: (err: Error | null, row: Customer | null) => void) {
-  const query = `SELECT _id, username FROM customers
-                WHERE _id = ?`;
-
-  db.get(query, id, function (this, err, row) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, row);
-    }
-  });
-}
